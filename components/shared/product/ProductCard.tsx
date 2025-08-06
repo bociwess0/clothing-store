@@ -3,6 +3,7 @@ import { Product } from "./ProductList";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import Link from "next/link";
 import Image from "next/image";
+import ProductPrice from "./ProductPrice";
 
 interface Props {
   product: Product;
@@ -10,7 +11,7 @@ interface Props {
 
 export default function ProductCard({ product }: Props) {
   return (
-    <Card className="w-full max-w-sm">
+    <Card className="w-full max-w-sm p-0">
       <CardHeader className="p-0 items-center">
         <Link href={`/product/${product.slug}`}>
           <Image
@@ -30,7 +31,7 @@ export default function ProductCard({ product }: Props) {
 
         <div className='flex-between gap-4'>
             <p>{product.rating} Stars</p> {product.stock > 0 ? (
-            <p className="font-bold">{ product.price }</p>
+            <ProductPrice value={Number(product.price)} />
         ): (<p className="text-destructive">Out 0</p>
         )}
         </div>
