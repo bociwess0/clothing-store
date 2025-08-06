@@ -1,6 +1,7 @@
 import React from "react";
+import ProductCard from "./ProductCard";
 
-interface Product {
+export interface Product {
   name: string
   slug: string
   category: string
@@ -29,7 +30,7 @@ export default function ProductList({ data, title,limit }: Props) {
       {data.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             { limitedData.map((product: Product, index: number) => (
-                <div key={index}>{product.name}</div>
+                <ProductCard key={index} product={product} />
             ))}
         </div>
       ) : (
