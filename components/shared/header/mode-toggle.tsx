@@ -39,7 +39,7 @@ export default function ModeToggle() {
                     Dark
                 </DropdownMenuCheckboxItem>
                 <DropdownMenuCheckboxItem className='cursor-pointer' checked = {theme === 'light'} onClick={() => setTheme('light')} >
-                    System
+                    Light
                 </DropdownMenuCheckboxItem>
             </DropdownMenuContent>
         </DropdownMenu>
