@@ -1,9 +1,9 @@
 import React from "react";
-import { Product } from "./ProductList";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import Link from "next/link";
 import Image from "next/image";
 import ProductPrice from "./ProductPrice";
+import { Product } from "@/types/types";
 
 interface Props {
   product: Product;
@@ -30,7 +30,7 @@ export default function ProductCard({ product }: Props) {
         </Link>
 
         <div className='flex-between gap-4'>
-            <p>{product.rating} Stars</p> {product.stock > 0 ? (
+            <p>{product.rating.toString()} Stars</p> {product.stock > 0 ? (
             <ProductPrice value={Number(product.price)} />
         ): (<p className="text-destructive">Out 0</p>
         )}
