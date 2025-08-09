@@ -1,18 +1,10 @@
+import { insertProductSchema } from "@/lib/validators";
 import { Decimal } from "@prisma/client/runtime/binary";
+import z from "zod";
 
-export interface Product {
+export type Product = z.infer<typeof insertProductSchema> & {
     id: string;
-    name: string;
-    slug: string;
-    category: string;
-    images: string[];
-    brand: string;
-    description: string;
-    stock: number;
-    price: Decimal;
-    rating: Decimal;
-    numReviews: number;
-    isFeatured: boolean;
-    banner: string | null;
-    createdAt: Date;
+    rating: Decimal,
+    createdAt: Date,
+    price: Decimal | string
 }
