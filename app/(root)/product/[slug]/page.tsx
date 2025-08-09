@@ -1,4 +1,5 @@
 import NotFound from "@/app/not-found";
+import ProductImages from "@/components/shared/product/ProductImages";
 import ProductPrice from "@/components/shared/product/ProductPrice";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -24,7 +25,7 @@ export default async function ProductDetailsPage(props: Props) {
         <div className='grid grid-cols-1 md:grid-cols-5'>
           {/* Images Column */}
           <div className='col-span-2'>
-            {/* <ProductImages images={product.images} /> */}
+            <ProductImages images={product.images} />
           </div>
           {/* Details Column */}
           <div className='col-span-2 p-5'>
