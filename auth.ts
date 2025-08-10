@@ -48,6 +48,7 @@ export const config = {
       }
     })
   ],
+  secret: process.env.AUTH_SECRET,
   callbacks: {
     async session({session, user, trigger, token}) {
 
