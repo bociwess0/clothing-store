@@ -1,5 +1,4 @@
 import NextAuth from "next-auth";
-import { email, jwt } from "zod";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "./db/prisma";
 import CredentialsProvider from "next-auth/providers/credentials"
