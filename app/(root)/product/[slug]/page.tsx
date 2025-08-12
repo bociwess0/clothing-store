@@ -1,4 +1,5 @@
 import NotFound from "@/app/not-found";
+import AddToCart from "@/components/shared/product/AddToCart";
 import ProductImages from "@/components/shared/product/ProductImages";
 import ProductPrice from "@/components/shared/product/ProductPrice";
 import { Badge } from "@/components/ui/badge";
@@ -68,8 +69,8 @@ export default async function ProductDetailsPage(props: Props) {
                 </div>
                 {product.stock > 0 && (
                   <div className='flex-center'>
-                    {/* <AddToCart
-                      cart={cart}
+                    <AddToCart
+                      // cart={cart}
                       item={{
                         productId: product.id,
                         name: product.name,
@@ -78,7 +79,7 @@ export default async function ProductDetailsPage(props: Props) {
                         qty: 1,
                         image: product.images![0],
                       }}
-                    /> */}
+                    />
                   </div>
                 )}
               </CardContent>
