@@ -35,7 +35,7 @@ export default function CredentialsSignInForm() {
       <input type="hidden" name="callbackUrl" value={callbackUrl}/>
       <div className="space-y-6">
         <div>
-          <Label htmlFor="email">Email</Label>
+          <Label htmlFor="email" className='mb-2'>Email</Label>
           <Input
             name="email"
             id="email"
@@ -46,7 +46,7 @@ export default function CredentialsSignInForm() {
           ></Input>
         </div>
         <div>
-          <Label htmlFor="password">Password</Label>
+          <Label htmlFor="password" className='mb-2'>Password</Label>
           <Input
             name="password"
             id="password"
