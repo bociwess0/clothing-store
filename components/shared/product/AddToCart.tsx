@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { addItemToCart } from "@/lib/actions/cart.actions";
 import { CartItem } from "@/types/types";
-import { useRouter } from "next/router";
+import { Plus } from "lucide-react";
 import React from "react";
 import { toast } from "sonner";
 
@@ -28,6 +28,7 @@ export default function AddToCart({ item }: Props) {
       }
 
     } catch (error) {
+      console.log(error);
       toast("Product not added to cart!", {
         description: "Bad request!",
       });
@@ -35,7 +36,8 @@ export default function AddToCart({ item }: Props) {
   };
 
   return (
-    <Button onClick={handleAddToCart} className="cursor-pointer">
+    <Button className='w-full mt-4 cursor-pointer' type='button' onClick={handleAddToCart}>
+      <Plus className='w-4 h-4' />
       Add To Cart
     </Button>
   );

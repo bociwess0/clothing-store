@@ -51,7 +51,7 @@ export default async function ProductDetailsPage(props: Props) {
           </div>
           {/* Action Column */}
           <div>
-            <Card>
+            <Card className="py-2">
               <CardContent className='p-4'>
                 <div className='mb-2 flex justify-between'>
                   <div>Price</div>

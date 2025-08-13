@@ -14,9 +14,6 @@ import React from "react";
 
 export default async function UserButton() {
   const session = await auth();
-
-  console.log(session);
-
   if (!session) {
     return (
       <Button asChild>
