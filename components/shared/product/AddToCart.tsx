@@ -18,18 +18,20 @@ export default function AddToCart({ item }: Props) {
       const res = await addItemToCart(item);
 
       if (res.success) {
-        toast("Product is added to cart!", {
+        
+        toast(`${item.name} is added to cart!`, {
           description: res.message,
         });
+        
       } else {
-        toast("Product not added to cart!", {
+        toast(`${item.name} is not added to cart!`, {
           description: res.message,
         });
       }
 
     } catch (error) {
       console.log(error);
-      toast("Product not added to cart!", {
+      toast("Error occured while trying to add product in cart!", {
         description: "Bad request!",
       });
     }
