@@ -2,7 +2,7 @@
 
 import { auth } from "@/auth";
 import { prisma } from "@/db/prisma";
-import { Cart, CartItem } from "@/types/types";
+import { CartItem } from "@/types/types";
 import { cookies } from "next/headers";
 import { convertToPlainObject, round2 } from "../utils";
 import { cartItemSchema, insertCartSchema } from "../validators";
@@ -117,6 +117,7 @@ export async function addItemToCart(data: CartItem) {
 
     }
   } catch (error) {
+    console.log(error);
     return {
       success: false,
       message: "Error occured",
