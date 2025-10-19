@@ -4,6 +4,7 @@ import ProductImages from "@/components/shared/product/ProductImages";
 import ProductPrice from "@/components/shared/product/ProductPrice";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { GetMyCart } from "@/lib/actions/cart.actions";
 import { getProductsBySlug } from "@/lib/actions/product.actions";
 import React from "react";
 
@@ -19,6 +20,8 @@ export default async function ProductDetailsPage(props: Props) {
   if (!product) {
     return NotFound();
   }
+
+  const cart = await GetMyCart();
 
   return (
     <>
@@ -70,7 +73,7 @@ export default async function ProductDetailsPage(props: Props) {
                 {product.stock > 0 && (
                   <div className='flex-center'>
                     <AddToCart
-                      // cart={cart}
+                      cart={cart}
                       item={{
                         productId: product.id,
                         name: product.name,
