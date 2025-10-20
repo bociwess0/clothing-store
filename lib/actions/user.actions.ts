@@ -74,7 +74,6 @@ export async function getUserById(userId: string) {
   return user;
 }
 
-// Update the user's address
 export async function updateUserAddress(data: ShippingAddress) {
   try {
     const session = await auth();
