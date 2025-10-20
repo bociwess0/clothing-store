@@ -3,6 +3,8 @@ import { GetMyCart } from "@/lib/actions/cart.actions";
 import { getUserById } from "@/lib/actions/user.actions";
 import { redirect } from "next/navigation";
 import React from "react";
+import ShippingAddressForm from "./ShippingAddressForm";
+import { ShippingAddress } from "@/types/types";
 
 export default async function ShippingAddressPage() {
   const cart = await GetMyCart();
@@ -18,8 +20,8 @@ export default async function ShippingAddressPage() {
   const user = await getUserById(userId);
 
   return (
-    <>
-      address
-    </>
+    <div className="h-[80vh]">
+      <ShippingAddressForm address={user.address as ShippingAddress} />
+    </div>
   );
 }
