@@ -4,14 +4,14 @@ import { prisma } from "./db/prisma";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { compareSync } from "bcrypt-ts-edge";
 import type { NextAuthConfig } from "next-auth";
-import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
+import { authConfig } from "./auth.config";
 
 export const config = {
   pages: {
-    signIn: "/signin",
-    signOut: "/signout",
-    error: "/signin", // Error code passed in query string as ?error=
+    signIn: "/sign-in",
+    signOut: "/sign-out",
+    error: "/sign-in", // Error code passed in query string as ?error=
   },
   session: {
     strategy: "jwt" as const,
@@ -55,6 +55,7 @@ export const config = {
   ],
   secret: process.env.AUTH_SECRET,
   callbacks: {
+    ...authConfig.callbacks,
     async session({ session, user, trigger, token }) {
       if (typeof token.sub === "string") {
         session.user.id = token.sub;
@@ -84,55 +85,30 @@ export const config = {
         }
       }
 
-      if(trigger === 'signIn' || trigger === 'signUp') {
+      if (trigger === "signIn" || trigger === "signUp") {
         const cookiesObject = await cookies();
         const sessionCartId = cookiesObject.get("sessionCartId")?.value;
 
-        if(sessionCartId) {
+        if (sessionCartId) {
           const sessionCart = await prisma.cart.findFirst({
             where: { sessionCartId },
-          })
+          });
 
-          if(sessionCart) {
+          if (sessionCart) {
             await prisma.cart.deleteMany({
-              where: {userId: user.id}
-            })
+              where: { userId: user.id },
+            });
 
             await prisma.cart.update({
-              where: { id: sessionCart.id},
-              data: { userId: user.id}
-            })
+              where: { id: sessionCart.id },
+              data: { userId: user.id },
+            });
           }
         }
-      } 
+      }
 
       return token;
-    },
-    authorized({ request, auth }) {
-      console.log(789789);
-      
-      if (!request.cookies.get("sessionCartId")) {
-
-        const sessionCartId = crypto.randomUUID();
-
-        console.log(sessionCartId);
-        
-
-        const newRequestHeaders = new Headers(request.headers);
-
-        const response = NextResponse.next({
-          request: {
-            headers: newRequestHeaders,
-          },
-        });
-
-        response.cookies.set("sessionCartId", sessionCartId);
-
-        return response;
-      } else {
-        return true;
-      }
-    },
+    }
   },
 } satisfies NextAuthConfig;
 

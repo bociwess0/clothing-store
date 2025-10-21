@@ -1,5 +1,5 @@
-import type { NextAuthConfig } from 'next-auth';
-import { NextResponse } from 'next/server';
+import type { NextAuthConfig } from "next-auth";
+import { NextResponse } from "next/server";
 
 export const authConfig = {
   providers: [], // Required by NextAuthConfig type
@@ -19,23 +19,20 @@ export const authConfig = {
       // Get pathname from the req URL object
       const { pathname } = request.nextUrl;
       // Check if user is not authenticated and accessing a protected path
-      if (!auth && protectedPaths.some((p) => p.test(pathname))) return false;
+      // If unauthenticated and hitting protected route → redirect manually
+      if (!auth && protectedPaths.some((p) => p.test(pathname))) {
+        const signInUrl = new URL("/sign-in", request.url);
+        signInUrl.searchParams.set("callbackUrl", request.url);
+        return NextResponse.redirect(signInUrl);
+      }
 
-      // Check for session cart cookie
-      if (!request.cookies.get('sessionCartId')) {
-        // Generate new session cart id cookie
+      // Session cart logic...
+      if (!request.cookies.get("sessionCartId")) {
         const sessionCartId = crypto.randomUUID();
-
-        // Create new response and add the new headers
         const response = NextResponse.next({
-          request: {
-            headers: new Headers(request.headers),
-          },
+          request: { headers: new Headers(request.headers) },
         });
-
-        // Set newly generated sessionCartId in the response cookies
-        response.cookies.set('sessionCartId', sessionCartId);
-
+        response.cookies.set("sessionCartId", sessionCartId);
         return response;
       }
 
