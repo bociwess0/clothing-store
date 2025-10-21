@@ -11,7 +11,6 @@ const CartPage = async () => {
   return (
     <>
       <CartTable cart={cart} />
-      
     </>
   );
 };
