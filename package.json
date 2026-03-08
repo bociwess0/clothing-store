@@ -26,7 +26,6 @@
     "next": "15.4.5",
     "next-auth": "^5.0.0-beta.29",
     "next-themes": "^0.4.6",
-    "prisma": "^6.13.0",
     "radix-ui": "^1.4.3",
     "react": "19.1.0",
     "react-dom": "19.1.0",
@@ -46,6 +45,7 @@
     "bufferutil": "^4.0.9",
     "eslint": "^9",
     "eslint-config-next": "15.4.5",
+    "prisma": "^6.13.0",
     "tailwindcss": "^4",
     "tw-animate-css": "^1.3.6",
     "typescript": "^5"
