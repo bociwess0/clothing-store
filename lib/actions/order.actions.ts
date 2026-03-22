@@ -6,6 +6,7 @@ import { insertOrderSchema } from "../validators";
 import { getUserById } from "./user.actions";
 import { GetMyCart } from "./cart.actions";
 import { auth } from "@/auth";
+import { convertToPlainObject } from "../utils";
 
 export async function createOrder() {
   try {
@@ -93,4 +94,18 @@ export async function createOrder() {
     console.log(error);
     return { success: false, message: "Error while adding order!" };
   }
+}
+
+export async function getOrderById(orderId: string) {
+  const data = await prisma.order.findFirst({
+    where: {
+      id: orderId,
+    },
+    include: {
+      orderitems: true,
+      user: { select: { name: true, email: true } },
+    },
+  });
+
+  return convertToPlainObject(data);
 }
